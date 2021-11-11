@@ -1,11 +1,11 @@
-use hector_rs::{run_hector, emissions::emissions};
+use hector_rs::{run_hector, emissions::{START_YEAR, get_emissions}};
 
 fn main() {
-    let start_year = 1765;
     let end_year = 2100;
-    let ems = emissions();
-    unsafe {
-        let tgav = run_hector(start_year, end_year, &ems);
-        println!("tgav: {:?}", tgav);
-    }
+    let emissions = get_emissions(2050);
+    assert_eq!(emissions["simpleNbox"]["ffi_emissions"].len(), 2050-START_YEAR);
+    let tgav = unsafe {
+        run_hector(end_year, &emissions)
+    };
+    println!("tgav: {:?}", tgav);
 }

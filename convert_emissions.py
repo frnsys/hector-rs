@@ -10,7 +10,7 @@ for section, subsections in emissions.items():
     for k in subsections:
         try:
             vals = data[k]
-            lines.append('    {}.insert("{}", vec!{});'.format(section, k, vals))
+            lines.append('    {}.insert("{}", vec!{}[..n].to_vec());'.format(section, k, vals))
         except:
             continue
     lines.append('    emissions.insert("{}", {});'.format(section, section))
@@ -18,12 +18,15 @@ for section, subsections in emissions.items():
 contents = '''use crate::Emissions;
 use std::collections::HashMap;
 
-pub fn emissions() -> Emissions {{
+pub const START_YEAR: usize = {};
+
+pub fn get_emissions(to_year: usize) -> Emissions {{
+    let n = to_year - START_YEAR;
     let mut emissions: Emissions = HashMap::new();
 {}
     emissions
 }}
-'''.format('\n'.join(lines))
+'''.format(scenario['startYear'], '\n'.join(lines))
 
 with open('src/emissions.rs', 'w') as f:
     f.write(contents)

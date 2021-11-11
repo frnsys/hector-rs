@@ -1,13 +1,13 @@
 mod config;
 pub mod emissions;
 use config::configure;
-use emissions::emissions;
 use std::collections::HashMap;
+use emissions::START_YEAR;
 
 #[cxx::bridge(namespace = "rust_hector")]
 mod ffi {
     unsafe extern "C++" {
-        include!("hector-rs/include/Hector.h");
+        include!("Hector.h");
 
         type HectorClient;
 
@@ -27,13 +27,13 @@ mod ffi {
 
 pub type Emissions = HashMap<&'static str, HashMap<&'static str, Vec<f64>>>;
 
-pub unsafe fn run_hector(start_year: usize, end_year: usize, emissions: &Emissions) -> f64 {
+pub unsafe fn run_hector(end_year: usize, emissions: &Emissions) -> f64 {
     let hector = ffi::new_hector();
 
     configure(&hector);
 
     // Set emissions
-    let years: Vec<usize> = (start_year..end_year).collect();
+    let years: Vec<usize> = (START_YEAR..end_year).collect();
     for (section, sources) in emissions {
         for (source, vals) in sources {
             // Fill missing values with last known value
