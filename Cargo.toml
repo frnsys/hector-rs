@@ -1,5 +1,5 @@
 [package]
-name = "hector-rs"
+name = "hector"
 version = "0.1.0"
 edition = "2021"
 
