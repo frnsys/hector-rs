@@ -1,0 +1,22 @@
+diff --git a/src/logger.cpp b/src/logger.cpp
+index 7c00ddf..faab37a 100644
+--- a/src/logger.cpp
++++ b/src/logger.cpp
+@@ -20,7 +20,8 @@
+ // If using the R package, use Rcpp to call R's file processing
+ // functions. Otherwise (e.g. if building standalone Hector), fall
+ // back to boost::filesystem (which needs to be installed).
+-#ifdef USE_RCPP
++#ifdef NO_LOGGING
++#elif USE_RCPP
+ #include <Rcpp.h>
+ #else
+ #include <boost/filesystem.hpp>
+@@ -287,6 +288,7 @@ void Logger::chk_logdir(std::string dir)
+             H_THROW("Directory "+dir+" does not exist and could not create it.");
+         }
+     }
++#elif NO_LOGGING
+ #else
+     fs::path fs_dir(dir);
+     // first check to see if dir exists and is a directory
