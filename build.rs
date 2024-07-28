@@ -29,6 +29,7 @@ fn main() {
         .include("include")
         .include("hector/inst/include")
         .flag_if_supported("-std=c++14")
+        .flag_if_supported("/EHsc")
         .compile("hector-rs");
 
     println!("cargo:rerun-if-changed=src/main.rs");
