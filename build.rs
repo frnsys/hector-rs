@@ -30,6 +30,11 @@ fn main() {
         .include("hector/inst/include")
         .flag_if_supported("-std=c++14")
         .flag_if_supported("/EHsc")
+        // Suppress some warnings we can't do anything about
+        .flag_if_supported("-Wno-unused-parameter")
+        .flag_if_supported("-Wno-unused-variable")
+        .flag_if_supported("-Wno-unknown-pragmas")
+        .flag_if_supported("-Wno-unused-but-set-variable")
         .compile("hector-rs");
 
     println!("cargo:rerun-if-changed=src/main.rs");
