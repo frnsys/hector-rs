@@ -37,7 +37,7 @@ fn main() {
         .flag_if_supported("-Wno-unused-but-set-variable")
         .compile("hector-rs");
 
-    println!("cargo:rerun-if-changed=src/main.rs");
+    println!("cargo:rerun-if-changed=src/lib.rs");
     println!("cargo:rerun-if-changed=src/Hector.cpp");
     println!("cargo:rerun-if-changed=include/Hector.h");
 }
