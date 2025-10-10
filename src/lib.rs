@@ -40,14 +40,6 @@ mod ffi {
             year: usize,
             value: f64,
         );
-        fn set_timed_double_unit(
-            &self,
-            section: &str,
-            variable: &str,
-            year: usize,
-            value: f64,
-            unit: &str,
-        );
         fn set_timed_array(
             &self,
             section: &str,

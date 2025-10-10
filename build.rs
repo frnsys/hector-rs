@@ -35,6 +35,9 @@ fn main() {
         .flag_if_supported("-Wno-unused-variable")
         .flag_if_supported("-Wno-unknown-pragmas")
         .flag_if_supported("-Wno-unused-but-set-variable")
+        .flag_if_supported("-Wno-catch-value")
+        .flag_if_supported("-Wno-sign-compare")
+        .flag_if_supported("-Wno-return-type")
         .compile("hector-rs");
 
     println!("cargo:rerun-if-changed=src/lib.rs");
