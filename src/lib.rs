@@ -74,7 +74,7 @@ pub unsafe fn run_hector(
     configure(&hector);
 
     // Set emissions
-    let years: Vec<usize> = (START_YEAR..end_year).collect();
+    let years: Vec<usize> = (START_YEAR..=end_year).collect();
     for (section, sources) in emissions {
         for (source, vals) in sources {
             // Fill missing values with last known value
